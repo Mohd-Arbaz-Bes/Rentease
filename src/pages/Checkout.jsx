@@ -31,7 +31,7 @@ export default function Checkout() {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/orders", {
+      const res = await axios.post("https://rentease-9mjo.onrender.com/api/orders", {
         userId: user._id,
 
         products: cart.map((item) => ({

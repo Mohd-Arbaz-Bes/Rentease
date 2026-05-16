@@ -20,7 +20,7 @@ export default function Admin() {
   // FETCH PRODUCTS
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/products");
+      const res = await axios.get(`https://rentease-9mjo.onrender.com/api/products/${id}`);
       setProducts(res.data);
     } catch (err) {
       console.log(err);
@@ -60,12 +60,12 @@ export default function Admin() {
 
       if (editId) {
         await axios.put(
-          `http://localhost:5000/api/products/${editId}`,
+          `https://rentease-9mjo.onrender.com${editId}`,
           formData,
         );
         alert("Product Updated Successfully!");
       } else {
-        await axios.post("http://localhost:5000/api/products", formData);
+        await axios.post("https://rentease-9mjo.onrender.com/api/products", formData);
         alert("Product Added Successfully!");
       }
 
@@ -96,7 +96,7 @@ export default function Admin() {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/products/${id}`);
+      await axios.delete(`https://rentease-9mjo.onrender.com/api/products/${id}`);
 
       alert("Product Deleted");
       fetchProducts();

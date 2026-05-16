@@ -20,7 +20,7 @@ export default function Dashboard() {
     }
 
     axios
-      .get(`http://localhost:5000/api/orders/user/${user._id}`)
+      .get(`https://rentease-9mjo.onrender.com/api/orders/user/${user._id}`)
       .then((res) => setOrders(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -29,7 +29,7 @@ export default function Dashboard() {
 
   const handleReturn = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/api/orders/return/${id}`);
+      await axios.put(`https://rentease-9mjo.onrender.com/api/orders/return/${id}`);
 
       alert("Product Returned");
 
@@ -118,7 +118,7 @@ export default function Dashboard() {
                         onClick={async () => {
                           try {
                             await axios.delete(
-                              `http://localhost:5000/api/orders/${order._id}`,
+                              `https://rentease-9mjo.onrender.com/api/orders/${order._id}`,
                             );
 
                             setOrders((prev) =>

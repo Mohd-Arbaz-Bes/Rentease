@@ -7,7 +7,7 @@ const Layout = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products?limit=3")
+      .get("https://rentease-9mjo.onrender.com/api/products?limit=3")
       .then((res) => setProducts(res.data))
       .catch((err) => console.log(err));
   }, []);
