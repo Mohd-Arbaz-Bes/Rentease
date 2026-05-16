@@ -11,10 +11,10 @@ const storage = new CloudinaryStorage({
         width: 800,
         crop: "limit",
         quality: "auto",
-        fetch_format: "auto"
-      }
-    ]
-  }
+        fetch_format: "auto",
+      },
+    ],
+  },
 });
 
 const upload = multer({
@@ -25,4 +25,4 @@ const upload = multer({
   },
 });
 
-export default upload; 
+export default upload;

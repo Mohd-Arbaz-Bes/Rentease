@@ -4,8 +4,7 @@ import upload from "../middleware/upload.js";
 
 const router = express.Router();
 
-
-// ✅ GET ALL PRODUCTS + FILTER
+//  GET ALL PRODUCTS + FILTER
 router.get("/", async (req, res) => {
   try {
     const { category, search } = req.query;
@@ -31,14 +30,12 @@ router.get("/", async (req, res) => {
     const products = await Product.find(filter);
 
     res.json(products);
-
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-
-// ✅ GET SINGLE PRODUCT
+//  GET SINGLE PRODUCT
 router.get("/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -50,14 +47,12 @@ router.get("/:id", async (req, res) => {
     }
 
     res.json(product);
-
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-
-// ✅ CREATE PRODUCT (WITH CLOUDINARY IMAGE UPLOAD)
+// CREATE PRODUCT (WITH CLOUDINARY IMAGE UPLOAD)
 router.post("/", upload.single("image"), async (req, res) => {
   try {
     const newProduct = new Product({
@@ -74,14 +69,12 @@ router.post("/", upload.single("image"), async (req, res) => {
     await newProduct.save();
 
     res.status(201).json(newProduct);
-
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-
-// ✅ UPDATE PRODUCT (IMAGE OPTIONAL)
+// UPDATE PRODUCT (IMAGE OPTIONAL)
 router.put("/:id", upload.single("image"), async (req, res) => {
   try {
     let updateData = { ...req.body };
@@ -93,18 +86,16 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
       updateData,
-      { new: true }
+      { new: true },
     );
 
     res.json(updatedProduct);
-
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-
-// ✅ DELETE PRODUCT
+// DELETE PRODUCT
 router.delete("/:id", async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
@@ -112,7 +103,6 @@ router.delete("/:id", async (req, res) => {
     res.json({
       message: "Product deleted",
     });
-
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

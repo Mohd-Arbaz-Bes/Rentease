@@ -8,9 +8,9 @@ router.post("/", async (req, res) => {
   try {
     const order = await Order.create(req.body);
     res.json(order);
-  }catch (err) {
+  } catch (err) {
     res.status(500).json({ error: err.message });
-    }
+  }
 });
 
 //get order by user
@@ -26,28 +26,23 @@ router.get("/user/:userId", async (req, res) => {
 // UPDATE order status
 
 router.put("/return/:id", async (req, res) => {
-
   try {
-
     const order = await Order.findByIdAndUpdate(
-
       req.params.id,
 
       {
-        status: "returned"
+        status: "returned",
       },
 
       {
-        new: true
-      }
+        new: true,
+      },
     );
 
     res.json(order);
-
   } catch (err) {
-
     res.status(500).json({
-      error: err.message
+      error: err.message,
     });
   }
 });
@@ -55,20 +50,13 @@ router.put("/return/:id", async (req, res) => {
 // DELETE ORDER
 
 router.delete("/:id", async (req, res) => {
-
   try {
-
-    await Order.findByIdAndDelete(
-      req.params.id
-    );
+    await Order.findByIdAndDelete(req.params.id);
 
     res.json({
-      message:
-        "Order Deleted",
+      message: "Order Deleted",
     });
-
   } catch (err) {
-
     res.status(500).json({
       error: err.message,
     });
