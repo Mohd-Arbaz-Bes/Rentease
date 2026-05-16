@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import ProductCard from "../components/ProductCard";
+import API from "../api";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -20,13 +21,12 @@ export default function Products() {
   const search = query.get("search");
 
   // FETCH PRODUCTS
-
   useEffect(() => {
     setLoading(true);
 
     axios
       .get(
-        `http://localhost:5000/api/products?category=${category || ""}&search=${search || ""}&limit=8`,
+        `${API}/api/products?category=${category || ""}&search=${search || ""}&limit=8`,
       )
       .then((res) => {
         setProducts(res.data);
@@ -41,7 +41,6 @@ export default function Products() {
   }, [category, search]);
 
   // CATEGORY FILTER
-
   const handleCategory = (cat) => {
     navigate(`/products?category=${cat}`);
   };
@@ -49,7 +48,6 @@ export default function Products() {
   return (
     <div className="min-h-screen bg-gray-100 px-4 sm:px-6 py-10">
       {/* PAGE TITLE */}
-
       <div className="text-center mb-10">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">
           Explore Products
@@ -61,7 +59,6 @@ export default function Products() {
       </div>
 
       {/* FILTER BUTTONS */}
-
       <div className="flex flex-wrap justify-center gap-4 mb-8">
         <button
           onClick={() => handleCategory("furniture")}
@@ -94,7 +91,6 @@ export default function Products() {
       </div>
 
       {/* SEARCH RESULT */}
-
       {search && (
         <p className="text-center text-gray-600 mb-6">
           Search result for:
@@ -103,7 +99,6 @@ export default function Products() {
       )}
 
       {/* LOADING */}
-
       {loading ? (
         <div className="flex justify-center items-center mt-20">
           <h2 className="text-2xl font-semibold text-gray-700">
@@ -112,7 +107,6 @@ export default function Products() {
         </div>
       ) : products.length === 0 ? (
         /* NO PRODUCTS */
-
         <div className="text-center mt-20">
           <h2 className="text-2xl font-semibold text-gray-700">
             No Products Found
@@ -122,7 +116,6 @@ export default function Products() {
         </div>
       ) : (
         /* PRODUCTS GRID */
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((p) => (
             <ProductCard key={p._id} p={p} />

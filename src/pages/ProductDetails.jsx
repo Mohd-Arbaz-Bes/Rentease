@@ -6,6 +6,8 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { CartContext } from "../context/CartContext";
 
+import API from "../api";
+
 export default function ProductDetails() {
   const { id } = useParams();
 
@@ -17,7 +19,7 @@ export default function ProductDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/products/${id}`)
+      .get(`${API}/api/products/${id}`)
       .then((res) => setProduct(res.data))
       .catch((err) => console.log(err));
   }, [id]);
@@ -34,7 +36,6 @@ export default function ProductDetails() {
     <div className="min-h-screen bg-gray-100 px-4 py-10">
       <div className="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden grid md:grid-cols-2 gap-10 p-8">
         {/* IMAGE */}
-
         <div>
           <img
             src={product.image}
@@ -47,7 +48,6 @@ export default function ProductDetails() {
         </div>
 
         {/* DETAILS */}
-
         <div className="flex flex-col justify-center">
           <span className="bg-blue-100 text-blue-700 px-4 py-1 rounded-full w-fit text-sm font-medium">
             {product.category}
