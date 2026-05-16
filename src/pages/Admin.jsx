@@ -20,9 +20,7 @@ export default function Admin() {
   // FETCH PRODUCTS
   const fetchProducts = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:5000/api/products"
-      );
+      const res = await axios.get("http://localhost:5000/api/products");
       setProducts(res.data);
     } catch (err) {
       console.log(err);
@@ -41,7 +39,7 @@ export default function Admin() {
     });
   };
 
-  // ADD / UPDATE PRODUCT (CLOUDINARY READY)
+  // ADD / UPDATE PRODUCT 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -50,10 +48,7 @@ export default function Admin() {
 
       formData.append("name", form.name);
       formData.append("category", form.category);
-      formData.append(
-        "pricePerMonth",
-        Number(form.pricePerMonth)
-      );
+      formData.append("pricePerMonth", Number(form.pricePerMonth));
       formData.append("deposit", Number(form.deposit));
       formData.append("stock", Number(form.stock));
       formData.append("description", form.description);
@@ -66,14 +61,11 @@ export default function Admin() {
       if (editId) {
         await axios.put(
           `http://localhost:5000/api/products/${editId}`,
-          formData
+          formData,
         );
         alert("Product Updated Successfully!");
       } else {
-        await axios.post(
-          "http://localhost:5000/api/products",
-          formData
-        );
+        await axios.post("http://localhost:5000/api/products", formData);
         alert("Product Added Successfully!");
       }
 
@@ -99,16 +91,12 @@ export default function Admin() {
 
   // DELETE PRODUCT
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Delete this product?"
-    );
+    const confirmDelete = window.confirm("Delete this product?");
 
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(
-        `http://localhost:5000/api/products/${id}`
-      );
+      await axios.delete(`http://localhost:5000/api/products/${id}`);
 
       alert("Product Deleted");
       fetchProducts();
@@ -140,19 +128,13 @@ export default function Admin() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-
       {/* HEADER */}
       <div className="bg-blue-600 text-white px-8 py-6">
-        <h1 className="text-4xl font-bold">
-          Admin Dashboard
-        </h1>
-        <p className="mt-2">
-          Manage products and rentals
-        </p>
+        <h1 className="text-4xl font-bold">Admin Dashboard</h1>
+        <p className="mt-2">Manage products and rentals</p>
       </div>
 
       <div className="p-6 max-w-6xl mx-auto bg-white rounded-3xl shadow mt-6">
-
         {/* FORM TITLE */}
         <h2 className="text-3xl font-bold mb-6">
           {editId ? "Edit Product" : "Add Product"}
@@ -163,7 +145,6 @@ export default function Admin() {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 gap-5"
         >
-
           <input
             type="text"
             name="name"
@@ -239,30 +220,17 @@ export default function Admin() {
           >
             {editId ? "Update Product" : "Add Product"}
           </button>
-
         </form>
 
         {/* PRODUCTS LIST */}
-        <h2 className="text-2xl font-bold mt-10 mb-4">
-          All Products
-        </h2>
+        <h2 className="text-2xl font-bold mt-10 mb-4">All Products</h2>
 
         <div className="grid md:grid-cols-3 gap-5">
-
           {products.map((p) => (
-            <div
-              key={p._id}
-              className="bg-gray-50 p-4 rounded shadow"
-            >
+            <div key={p._id} className="bg-gray-50 p-4 rounded shadow">
+              <img src={p.image} className="h-40 w-full object-cover rounded" />
 
-              <img
-                src={p.image}
-                className="h-40 w-full object-cover rounded"
-              />
-
-              <h3 className="text-xl font-bold mt-2">
-                {p.name}
-              </h3>
+              <h3 className="text-xl font-bold mt-2">{p.name}</h3>
 
               <p>{p.category}</p>
 
@@ -271,7 +239,6 @@ export default function Admin() {
               </p>
 
               <div className="flex gap-2 mt-3">
-
                 <button
                   onClick={() => handleEdit(p)}
                   className="bg-yellow-500 text-white px-3 py-1 rounded"
@@ -285,14 +252,10 @@ export default function Admin() {
                 >
                   Delete
                 </button>
-
               </div>
-
             </div>
           ))}
-
         </div>
-
       </div>
     </div>
   );

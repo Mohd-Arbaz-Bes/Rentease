@@ -25,10 +25,7 @@ export default function CartProvider({ children }) {
   // SAVE CART
   useEffect(() => {
     if (user?._id) {
-      localStorage.setItem(
-        `cart_${user._id}`,
-        JSON.stringify(cart)
-      );
+      localStorage.setItem(`cart_${user._id}`, JSON.stringify(cart));
     }
   }, [cart, user]);
 
@@ -52,9 +49,7 @@ export default function CartProvider({ children }) {
 
   // REMOVE FROM CART
   const removeFromCart = (id) => {
-    setCart((prev) =>
-      prev.filter((item) => item._id !== id)
-    );
+    setCart((prev) => prev.filter((item) => item._id !== id));
   };
 
   return (

@@ -27,7 +27,6 @@ function App() {
         }
       >
         <Routes>
-
           <Route path="/" element={<Home />} />
 
           <Route path="/login" element={<Login />} />
@@ -36,10 +35,7 @@ function App() {
 
           <Route path="/products" element={<Products />} />
 
-          <Route
-            path="/products/:id"
-            element={<ProductDetails />}
-          />
+          <Route path="/products/:id" element={<ProductDetails />} />
 
           <Route path="/cart" element={<Cart />} />
 
@@ -55,7 +51,6 @@ function App() {
               </AdminRoute>
             }
           />
-
         </Routes>
       </Suspense>
     </>
